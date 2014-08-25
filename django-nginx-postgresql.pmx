@@ -1,0 +1,27 @@
+---
+name: django-nginx-postgresql
+description: django-nginx-postgresql with panamax
+keywords: django, nginx, postgresql, panamax
+type: Django
+documentation: ''
+images:
+- name: dockerfiles_django-uwsgi-nginx_latest
+  source: dockerfiles/django-uwsgi-nginx:latest
+  category: Web
+  type: Default
+  expose:
+  - '8000'
+  ports:
+  - host_port: '8000'
+    container_port: '80'
+    proto: TCP
+  links:
+  - service: postgres
+    alias: postgres
+- name: postgres
+  source: postgres:latest
+  category: Database
+  type: Default
+  links:
+  - service: dockerfiles_django-uwsgi-nginx_latest
+    alias: dockerfiles_django-uwsgi-nginx_latest
